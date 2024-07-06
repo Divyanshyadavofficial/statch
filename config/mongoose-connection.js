@@ -1,9 +1,11 @@
 const mongoose = require('mongoose');
-mongoose.connect("mongodb://127.0.0.1:27017/stacth")
+const dbgr = require("debug")("development:mongoose");
+const config = require("config");
+mongoose.connect(`${config.get("MONGODB_URI")}/stacth`)
 .then(function(){
-    console.log("connected");
+    dbgr("connected");
 })
 .catch(((err)=>{
-    console.log(err);
+    dbgr(err);
 }))
 module.exports = mongoose.connection;
